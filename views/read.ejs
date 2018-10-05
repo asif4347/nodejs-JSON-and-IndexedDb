@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Include Dexie -->
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+    <script>
+        //
+        // Define your database
+        //
+
+        var db = new Dexie("users_database");
+        db.version(1).stores({
+
+            Users: 'id,first_name,last_name,email,gender,ip_address'
+        });
+        Arr=[]
+        var t0=performance.now()
+        db.Users.filter(function(user){
+                return user.last_name==='Jone'
+            })
+        var t1=performance.now()
+        console.log(t1-t0)
+        
+    </script>
+    
+</head>
+
+</html>

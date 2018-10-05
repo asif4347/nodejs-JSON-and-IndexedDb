@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Include Dexie -->
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+    <script>
+        //
+        // Define your database
+        //
+
+        var db = new Dexie("users_database");
+        db.version(1).stores({
+
+            Users: 'id,first_name,last_name,email,gender,ip_address'
+        });
+        //
+        // Put some data into it
+        //
+        
+    </script>
+    <script>
+        $.getJSON('/json', function (data) {
+            if (data) {
+                db.Users.bulkPut(data).then((result) => {
+                    return db.Users.each(user=>console.log(user))
+                }).catch((err) => {
+                    console.log(err)
+                });
+
+            } else {
+                console.log('error occured')
+            }
+        });
+        
+    </script>
+</head>
+
+</html>
